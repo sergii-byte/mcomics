@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mcomics</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --red: #FF3333;
+            --blue: #2B4C7E;
+            --blue-dark: #1B2D4F;
+            --yellow: #FFDD00;
+            --green: #33CC33;
+            --white: #ffffff;
+            --black: #222222;
+            --orange: #FF8C42;
+            --purple: #7B68AE;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: var(--blue-dark);
+            color: var(--black);
+            overflow-x: hidden;
+        }
+
+        /* Halftone texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 6px 6px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: var(--black);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 4px solid var(--yellow);
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 2.2rem;
+            color: var(--yellow);
+            text-decoration: none;
+            letter-spacing: 3px;
+            text-shadow: 3px 3px 0 var(--red), -1px -1px 0 var(--red);
+            transition: transform 0.2s;
+        }
+
+        .logo:hover { transform: rotate(-2deg) scale(1.05); }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--yellow); }
+
+        .lang-switch {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+        }
+        .lang-switch a {
+            text-decoration: none;
+            transition: transform 0.2s, opacity 0.3s;
+            opacity: 0.5;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+        }
+        .lang-switch a:hover { opacity: 1; transform: scale(1.15); }
+        .lang-switch a.active { opacity: 1; }
+        .lang-switch img { width: 18px; height: 14px; }
+        .lang-switch a.text-flag {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 1px;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            border-radius: 2px;
+            padding: 1px 3px;
+        }
+        .lang-switch a.text-flag:hover { color: var(--yellow); border-color: var(--yellow); }
+        .lang-switch a.text-flag.active { color: var(--yellow); border-color: var(--yellow); opacity: 1; }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+            padding: 60px 20px 80px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 0; right: 0;
+            height: 60px;
+            background: var(--blue-dark);
+            clip-path: polygon(0 0, 100% 60%, 100% 100%, 0 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--red);
+            color: var(--white);
+            font-family: 'Bangers', cursive;
+            font-size: 1.1rem;
+            padding: 6px 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            transform: rotate(-2deg);
+        }
+
+        .hero-cover {
+            width: 260px;
+            border-radius: 6px;
+            box-shadow: 8px 8px 0 var(--black), 0 0 40px rgba(0,0,0,0.4);
+            margin-bottom: 30px;
+            border: 4px solid var(--white);
+            transition: transform 0.3s;
+        }
+
+        .hero-cover:hover { transform: rotate(2deg) scale(1.03); }
+
+        .hero h1 {
+            font-family: 'Bangers', cursive;
+            font-size: 4rem;
+            color: var(--yellow);
+            margin-bottom: 12px;
+            letter-spacing: 5px;
+            text-shadow: 4px 4px 0 var(--black);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background: var(--red);
+            color: var(--white);
+            font-family: 'Bangers', cursive;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            opacity: 0.5;
+            border-radius: 6px;
+            border: 3px solid var(--black);
+            box-shadow: 4px 4px 0 var(--black);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 var(--black);
+        }
+
+        .btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--black);
+        }
+
+        /* ===== COMICS SECTION ===== */
+        #comics {
+            padding: 80px 20px 60px;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 8px;
+            color: var(--yellow);
+            letter-spacing: 4px;
+            text-shadow: 3px 3px 0 var(--black);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            margin-bottom: 50px;
+            line-height: 1;
+        }
+
+        .comics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .comic-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            opacity: 0.5;
+            color: inherit;
+            border: 3px solid var(--black);
+            box-shadow: 5px 5px 0 var(--black);
+        }
+
+        .comic-card:hover {
+            transform: translate(-3px, -3px) rotate(-1deg);
+            box-shadow: 8px 8px 0 var(--black);
+        }
+
+        .comic-cover {
+            height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comic-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .comic-cover .cover-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .comic-cover .cover-icon {
+            font-size: 3.5rem;
+        }
+
+        .comic-cover .cover-title {
+            font-family: 'Bangers', cursive;
+            font-size: 1.3rem;
+            color: var(--white);
+            text-align: center;
+            letter-spacing: 3px;
+        }
+
+        .cover-1 { background: var(--blue); }
+        .cover-2 { background: var(--purple); }
+        .cover-3 { background: var(--orange); }
+
+        .comic-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--red);
+            color: var(--white);
+            font-family: 'Bangers', cursive;
+            padding: 4px 14px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            border: 2px solid var(--black);
+            box-shadow: 2px 2px 0 var(--black);
+            transform: rotate(3deg);
+        }
+
+        .comic-info {
+            padding: 20px;
+            border-top: 3px solid var(--black);
+        }
+
+        .comic-info h3 {
+            font-family: 'Bangers', cursive;
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            letter-spacing: 2px;
+        }
+
+        .comic-info p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .comic-genre {
+            font-size: 0.9rem;
+            opacity: 0.5;
+            color: var(--red);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ===== ABOUT ===== */
+        #about {
+            background: var(--yellow);
+            padding: 80px 20px;
+            position: relative;
+            z-index: 1;
+            border-top: 4px solid var(--black);
+            border-bottom: 4px solid var(--black);
+        }
+
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-container .section-title {
+            color: var(--black);
+            text-shadow: none;
+        }
+
+        .about-container .section-subtitle {
+            color: rgba(0,0,0,0.6);
+        }
+
+        .about-content {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .about-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 4px solid var(--black);
+            box-shadow: 4px 4px 0 var(--black);
+            overflow: hidden;
+        }
+
+        .about-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .about-text h3 {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            color: rgba(0,0,0,0.7);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 25px;
+            font-size: 0.85rem;
+            position: relative;
+            z-index: 1;
+            border-top: 4px solid var(--yellow);
+        }
+
+        footer a { color: var(--yellow); opacity: 0.5; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero-cover { width: 200px; }
+            .section-title { font-size: 2.2rem; }
+            .comics-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+            .about-content { justify-content: center; text-align: center; }
+            .about-avatar { margin: 0 auto; }
+            .about-stats { justify-content: center; flex-wrap: wrap; }
+            .nav-links { gap: 15px; }
+            .nav-links a { font-size: 0.75rem; }
+        }
+
+        @media (max-width: 480px) {
+            .logo { font-size: 1.6rem; }
+            .nav-links a { font-size: 0.7rem; line-height: 1; }
+            .comics-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
+            .comic-cover { height: 220px; }
+            .hero h1 { font-size: 2.2rem; }
+            .btn { padding: 12px 28px; font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <nav>
+        <a href="#" class="logo">MCOMICS</a>
+        <ul class="nav-links">
+            <li><a href="#comics">Комікси</a></li>
+            <li><a href="#about">Про автора</a></li>
+        </ul>
+        <div class="lang-switch">
+            <a href="../index.html" title="Español"><img src="https://flagcdn.com/16x12/es.png" alt="ES" style="vertical-align:middle"></a>
+
+            <a href="../ca/index.html" title="Català" ><img src="../images/flag-ca.svg" alt="CA" style="vertical-align:middle"></a>
+
+            <a href="../en/index.html" title="English"><img src="https://flagcdn.com/16x12/gb.png" alt="EN" style="vertical-align:middle"></a>
+
+            <a href="../uk/index.html" title="Українська" class="active"><img src="https://flagcdn.com/16x12/ua.png" alt="UK" style="vertical-align:middle"></a>
+
+            <a href="../fr/index.html" title="Français"><img src="https://flagcdn.com/16x12/fr.png" alt="FR" style="vertical-align:middle"></a>
+
+            <a href="../ja/index.html" title="日本語"><img src="https://flagcdn.com/16x12/jp.png" alt="JA" style="vertical-align:middle"></a>
+
+            <a href="../hu/index.html" title="Magyar"><img src="https://flagcdn.com/16x12/hu.png" alt="HU" style="vertical-align:middle"></a>
+    </div>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">НОВИЙ КОМІКС!</div>
+        <br><br>
+        <a href="comics/pavogato/index.html"><img src="../comics/pavogato/pages/mcomics_pavogato_1_1.jpg" alt="Pavogato" class="hero-cover"></a>
+        <h1>PAVOGATO</h1>
+        <p>Пригоди супергероя Котопавлінса — наполовину кіт, наполовину павлін!</p>
+        <a href="comics/pavogato/index.html" class="btn">ЧИТАТИ КОМІКС</a>
+    </div>
+</section>
+
+<!-- COMICS -->
+<section id="comics">
+    <h2 class="section-title">УСІ КОМІКСИ</h2>
+    <p class="section-subtitle">Серії та випуски Михайла</p>
+
+    <div class="comics-grid">
+        <!-- Pavogato -->
+        <a href="comics/pavogato/index.html" class="comic-card">
+            <div class="comic-cover cover-1">
+                <img src="../comics/pavogato/pages/mcomics_pavogato_1_1.jpg" alt="Pavogato">
+                <span class="comic-badge">16 СТОРІНОК</span>
+            </div>
+            <div class="comic-info">
+                <h3>Pavogato</h3>
+                <p>Супергерой Котопавлінс — наполовину кіт, наполовину павлін</p>
+                <span class="comic-genre">Супергерої</span>
+            </div>
+        </a>
+
+        <!-- Placeholder cards -->
+        <div class="comic-card" style="opacity: 0.5; cursor: default;">
+            <div class="comic-cover cover-2">
+                <div class="cover-placeholder">
+                    <span class="cover-icon">&#x1F4D6;</span>
+                    <span class="cover-title">СКОРО</span>
+                </div>
+            </div>
+            <div class="comic-info">
+                <h3>Новий комікс</h3>
+                <p>Михайло вже працює над наступною історією...</p>
+                <span class="comic-genre">Скоро</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="about-container">
+        <h2 class="section-title">ПРО АВТОРА</h2>
+        <p class="section-subtitle">Творець Pavogato та інших історій</p>
+
+        <div class="about-content">
+            <div class="about-avatar"><img src="../images/mykhailo.jpg" alt="Mykhailo"></div>
+            <div class="about-text">
+                <h3>Привіт, я Михайло!</h3>
+                <p>
+                    Я малюю комікси та придумую історії. Мій перший комікс — Pavogato — про супергероя Котопавлінса, наполовину кіт, наполовину павлін.
+                </p>
+                <p>
+                    Усі мої комікси намальовані від руки на папері!
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2026 Mcomics &middot; Barcelona</p>
+</footer>
+
+</body>
+</html>
