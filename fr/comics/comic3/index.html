@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pavogato — BIENTÔT — Mcomics</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --red: #FF3333; --blue: #2B4C7E; --blue-dark: #1B2D4F;
+            --yellow: #FFDD00; --white: #ffffff; --black: #222222;
+            --purple: #7B68AE; --orange: #FF8C42;
+        }
+        body { font-family: 'Open Sans', sans-serif; background: var(--blue-dark); min-height: 100vh; display: flex; flex-direction: column; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 6px 6px; pointer-events: none; z-index: 0; }
+        header { background: var(--black); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 4px solid var(--yellow); }
+        .back-btn { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.8rem; color: var(--white); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s; }
+        .back-btn:hover { color: var(--yellow); }
+        .lang-switch { display: flex; gap: 3px; align-items: center; }
+        .lang-switch a { text-decoration: none; transition: transform 0.2s, opacity 0.3s; opacity: 0.5; line-height: 1; display: flex; align-items: center; }
+        .lang-switch a:hover { opacity: 1; transform: scale(1.15); }
+        .lang-switch a.active { opacity: 1; }
+        .lang-switch img { width: 18px; height: 14px; }
+        .splash { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px; position: relative; z-index: 1; }
+        .splash-box { border: 4px solid var(--black); box-shadow: 8px 8px 0 var(--black); border-radius: 12px; padding: 60px 50px; text-align: center; max-width: 500px; width: 100%; }
+        .splash-icon { font-size: 4rem; margin-bottom: 20px; display: block; }
+        .splash-label { font-family: 'Bangers', cursive; font-size: 1rem; color: rgba(255,255,255,0.7); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; }
+        .splash-title { font-family: 'Bangers', cursive; font-size: 3rem; color: var(--yellow); letter-spacing: 4px; text-shadow: 3px 3px 0 rgba(0,0,0,0.4); margin-bottom: 20px; line-height: 1.1; }
+        .splash-message { font-size: 1.1rem; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 10px; font-weight: 700; }
+        .splash-sub { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-bottom: 35px; }
+        .back-home { display: inline-block; font-family: 'Bangers', cursive; font-size: 1.2rem; letter-spacing: 2px; color: var(--black); background: var(--yellow); padding: 12px 30px; border-radius: 6px; border: 3px solid var(--black); box-shadow: 4px 4px 0 var(--black); text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+        .back-home:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--black); }
+        @media (max-width: 480px) { .splash-box { padding: 40px 25px; } .splash-title { font-size: 2.2rem; } }
+    </style>
+</head>
+<body>
+<header>
+    <a href="../../index.html" class="back-btn">MCOMICS</a>
+    <div class="lang-switch">
+        <a href="../../../comics/comic3/index.html" title="Español"><img src="https://flagcdn.com/16x12/es.png" alt="ES" style="vertical-align:middle"></a>
+        <a href="../../../ca/comics/comic3/index.html" title="Català"><img src="../../../images/flag-ca.svg" alt="CA" style="vertical-align:middle"></a>
+        <a href="../../../en/comics/comic3/index.html" title="English"><img src="https://flagcdn.com/16x12/gb.png" alt="EN" style="vertical-align:middle"></a>
+        <a href="../../../uk/comics/comic3/index.html" title="Українська"><img src="https://flagcdn.com/16x12/ua.png" alt="UK" style="vertical-align:middle"></a>
+        <a href="../../../fr/comics/comic3/index.html" title="Français" class="active"><img src="https://flagcdn.com/16x12/fr.png" alt="FR" style="vertical-align:middle"></a>
+        <a href="../../../ja/comics/comic3/index.html" title="日本語"><img src="https://flagcdn.com/16x12/jp.png" alt="JA" style="vertical-align:middle"></a>
+        <a href="../../../hu/comics/comic3/index.html" title="Magyar"><img src="https://flagcdn.com/16x12/hu.png" alt="HU" style="vertical-align:middle"></a>
+    </div>
+</header>
+<div class="splash">
+    <div class="splash-box" style="background: var(--orange);">
+        <span class="splash-icon">🚀</span>
+        <div class="splash-label">BIENTÔT</div>
+        <div class="splash-title">MCOMICS</div>
+        <div class="splash-message">Le prochain comic de Mykhailo est en création.</div>
+        <div class="splash-sub">Restez à l’écoute !</div>
+        <a href="../../index.html" class="back-home">← RETOUR</a>
+    </div>
+</div>
+</body>
+</html>
