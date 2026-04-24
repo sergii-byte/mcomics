@@ -89,6 +89,35 @@
 
         .nav-links a:hover { color: var(--yellow); }
 
+        .lang-switch {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+        }
+        .lang-switch a {
+            text-decoration: none;
+            transition: transform 0.2s, opacity 0.3s;
+            opacity: 0.5;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+        }
+        .lang-switch a:hover { opacity: 1; transform: scale(1.15); }
+        .lang-switch a.active { opacity: 1; }
+        .lang-switch img { width: 18px; height: 14px; }
+        .lang-switch a.text-flag {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 1px;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            border-radius: 2px;
+            padding: 1px 3px;
+        }
+        .lang-switch a.text-flag:hover { color: var(--yellow); border-color: var(--yellow); }
+        .lang-switch a.text-flag.active { color: var(--yellow); border-color: var(--yellow); opacity: 1; }
+
         /* ===== HERO ===== */
         .hero {
             background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
@@ -151,7 +180,7 @@
         }
 
         .hero p {
-            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
             font-weight: 700;
             font-size: 1.1rem;
             color: rgba(255,255,255,0.9);
@@ -169,7 +198,7 @@
             font-family: 'Bangers', cursive;
             font-size: 1.4rem;
             letter-spacing: 3px;
-            text-decoration: none;
+            opacity: 0.5;
             border-radius: 6px;
             border: 3px solid var(--black);
             box-shadow: 4px 4px 0 var(--black);
@@ -208,12 +237,12 @@
 
         .section-subtitle {
             text-align: center;
-            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
             font-weight: 700;
             color: rgba(255,255,255,0.7);
             font-size: 0.95rem;
             margin-bottom: 50px;
-            letter-spacing: 1px;
+            line-height: 1;
         }
 
         .comics-grid {
@@ -228,7 +257,7 @@
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
-            text-decoration: none;
+            opacity: 0.5;
             color: inherit;
             border: 3px solid var(--black);
             box-shadow: 5px 5px 0 var(--black);
@@ -317,8 +346,8 @@
         }
 
         .comic-genre {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
+            font-size: 0.9rem;
+            opacity: 0.5;
             color: var(--red);
             font-size: 0.7rem;
             text-transform: uppercase;
@@ -404,37 +433,7 @@
             border-top: 4px solid var(--yellow);
         }
 
-        footer a { color: var(--yellow); text-decoration: none; }
-
-        /* Language switcher */
-        .lang-switch {
-            display: flex;
-            gap: 3px;
-            align-items: center;
-        }
-        .lang-switch a {
-            text-decoration: none;
-            transition: transform 0.2s, opacity 0.3s;
-            opacity: 0.5;
-            line-height: 1;
-            display: flex;
-            align-items: center;
-        }
-        .lang-switch a:hover { opacity: 1; transform: scale(1.15); }
-        .lang-switch a.active { opacity: 1; }
-        .lang-switch img { width: 18px; height: 14px; }
-        .lang-switch a.text-flag {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 0.55rem;
-            color: rgba(255,255,255,0.6);
-            letter-spacing: 1px;
-            border: 1.5px solid rgba(255,255,255,0.3);
-            border-radius: 2px;
-            padding: 1px 3px;
-        }
-        .lang-switch a.text-flag:hover { color: var(--yellow); border-color: var(--yellow); }
-        .lang-switch a.text-flag.active { color: var(--yellow); border-color: var(--yellow); opacity: 1; }
+        footer a { color: var(--yellow); opacity: 0.5; }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
@@ -451,7 +450,7 @@
 
         @media (max-width: 480px) {
             .logo { font-size: 1.6rem; }
-            .nav-links a { font-size: 0.7rem; letter-spacing: 1px; }
+            .nav-links a { font-size: 0.7rem; line-height: 1; }
             .comics-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
             .comic-cover { height: 220px; }
             .hero h1 { font-size: 2.2rem; }
@@ -494,7 +493,7 @@
         <br><br>
         <a href="comics/pavogato/index.html"><img src="../comics/pavogato/pages/mcomics_pavogato_1_1.jpg" alt="Pavogato" class="hero-cover"></a>
         <h1>PAVOGATO</h1>
-        <p>A szuperhős Macskpáva kalandjai — félig macska, félig páva!</p>
+        <p>A szuperhős Pavogato kalandjai — félig macska, félig páva!</p>
         <a href="comics/pavogato/index.html" class="btn">KÉPREGÉNY OLVASÁSA</a>
     </div>
 </section>
@@ -513,7 +512,7 @@
             </div>
             <div class="comic-info">
                 <h3>Pavogato</h3>
-                <p>A szuperhős Macskpáva — félig macska, félig páva</p>
+                <p>A szuperhős Pavogato — félig macska, félig páva</p>
                 <span class="comic-genre">Szuperhősök</span>
             </div>
         </a>
@@ -528,7 +527,7 @@
             </div>
             <div class="comic-info">
                 <h3>Pavogato 2</h3>
-                <p>A Macskpáva szuperhős következő kalandja</p>
+                <p>A Pavogato szuperhős következő kalandja</p>
                 <span class="comic-genre">Nem elérhető</span>
             </div>
         </a>
@@ -562,7 +561,7 @@
             <div class="about-text">
                 <h3>Szia, Mykhailo vagyok!</h3>
                 <p>
-                    Képregényeket rajzolok és történeteket találok ki. Az első képregényem — Pavogato — a szuperhős Macskpáváról szól, aki félig macska, félig páva.
+                    Képregényeket rajzolok és történeteket találok ki. Az első képregényem — Pavogato — a szuperhős Pavogatóról szól, aki félig macska, félig páva.
                 </p>
                 <p>
                     Minden képregényem kézzel rajzolt, papíron!

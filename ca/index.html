@@ -29,7 +29,6 @@
             overflow-x: hidden;
         }
 
-        /* Halftone texture overlay */
         body::before {
             content: '';
             position: fixed;
@@ -40,7 +39,6 @@
             z-index: 0;
         }
 
-        /* ===== HEADER ===== */
         header {
             background: var(--black);
             position: sticky;
@@ -89,7 +87,35 @@
 
         .nav-links a:hover { color: var(--yellow); }
 
-        /* ===== HERO ===== */
+        .lang-switch {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+        }
+        .lang-switch a {
+            text-decoration: none;
+            transition: transform 0.2s, opacity 0.3s;
+            opacity: 0.5;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+        }
+        .lang-switch a:hover { opacity: 1; transform: scale(1.15); }
+        .lang-switch a.active { opacity: 1; }
+        .lang-switch img { width: 18px; height: 14px; }
+        .lang-switch a.text-flag {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 1px;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            border-radius: 2px;
+            padding: 1px 3px;
+        }
+        .lang-switch a.text-flag:hover { color: var(--yellow); border-color: var(--yellow); }
+        .lang-switch a.text-flag.active { color: var(--yellow); border-color: var(--yellow); opacity: 1; }
+
         .hero {
             background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
             padding: 60px 20px 80px;
@@ -151,7 +177,7 @@
         }
 
         .hero p {
-            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
             font-weight: 700;
             font-size: 1.1rem;
             color: rgba(255,255,255,0.9);
@@ -169,7 +195,7 @@
             font-family: 'Bangers', cursive;
             font-size: 1.4rem;
             letter-spacing: 3px;
-            text-decoration: none;
+            opacity: 0.5;
             border-radius: 6px;
             border: 3px solid var(--black);
             box-shadow: 4px 4px 0 var(--black);
@@ -187,7 +213,6 @@
             box-shadow: 2px 2px 0 var(--black);
         }
 
-        /* ===== COMICS SECTION ===== */
         #comics {
             padding: 80px 20px 60px;
             max-width: 1100px;
@@ -208,12 +233,12 @@
 
         .section-subtitle {
             text-align: center;
-            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
             font-weight: 700;
             color: rgba(255,255,255,0.7);
             font-size: 0.95rem;
             margin-bottom: 50px;
-            letter-spacing: 1px;
+            line-height: 1;
         }
 
         .comics-grid {
@@ -228,7 +253,7 @@
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
-            text-decoration: none;
+            opacity: 0.5;
             color: inherit;
             border: 3px solid var(--black);
             box-shadow: 5px 5px 0 var(--black);
@@ -317,15 +342,14 @@
         }
 
         .comic-genre {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
+            font-size: 0.9rem;
+            opacity: 0.5;
             color: var(--red);
             font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        /* ===== ABOUT ===== */
         #about {
             background: var(--yellow);
             padding: 80px 20px;
@@ -391,8 +415,6 @@
             margin-bottom: 12px;
         }
 
-
-        /* ===== FOOTER ===== */
         footer {
             background: var(--black);
             color: var(--white);
@@ -404,39 +426,8 @@
             border-top: 4px solid var(--yellow);
         }
 
-        footer a { color: var(--yellow); text-decoration: none; }
+        footer a { color: var(--yellow); opacity: 0.5; }
 
-        /* Language switcher */
-        .lang-switch {
-            display: flex;
-            gap: 3px;
-            align-items: center;
-        }
-        .lang-switch a {
-            text-decoration: none;
-            transition: transform 0.2s, opacity 0.3s;
-            opacity: 0.5;
-            line-height: 1;
-            display: flex;
-            align-items: center;
-        }
-        .lang-switch a:hover { opacity: 1; transform: scale(1.15); }
-        .lang-switch a.active { opacity: 1; }
-        .lang-switch img { width: 18px; height: 14px; }
-        .lang-switch a.text-flag {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 0.55rem;
-            color: rgba(255,255,255,0.6);
-            letter-spacing: 1px;
-            border: 1.5px solid rgba(255,255,255,0.3);
-            border-radius: 2px;
-            padding: 1px 3px;
-        }
-        .lang-switch a.text-flag:hover { color: var(--yellow); border-color: var(--yellow); }
-        .lang-switch a.text-flag.active { color: var(--yellow); border-color: var(--yellow); opacity: 1; }
-
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.8rem; }
             .hero-cover { width: 200px; }
@@ -451,7 +442,7 @@
 
         @media (max-width: 480px) {
             .logo { font-size: 1.6rem; }
-            .nav-links a { font-size: 0.7rem; letter-spacing: 1px; }
+            .nav-links a { font-size: 0.7rem; line-height: 1; }
             .comics-grid { grid-template-columns: 1fr 1fr; gap: 15px; }
             .comic-cover { height: 220px; }
             .hero h1 { font-size: 2.2rem; }
@@ -494,7 +485,7 @@
         <br><br>
         <a href="comics/pavogato/index.html"><img src="../comics/pavogato/pages/mcomics_pavogato_1_1.jpg" alt="Pavogato" class="hero-cover"></a>
         <h1>PAVOGATO</h1>
-        <p>Les aventures del superheroi Gatpa&#243; — meitat gat, meitat pa&#243;!</p>
+        <p>Les aventures del superheroi Pavogato — meitat gat, meitat pa&#243;!</p>
         <a href="comics/pavogato/index.html" class="btn">LLEGIR C&#210;MIC</a>
     </div>
 </section>
@@ -513,7 +504,7 @@
             </div>
             <div class="comic-info">
                 <h3>Pavogato</h3>
-                <p>El superheroi Gatpa&#243; — meitat gat, meitat pa&#243;</p>
+                <p>El superheroi Pavogato — meitat gat, meitat pa&#243;</p>
                 <span class="comic-genre">Superherois</span>
             </div>
         </a>
@@ -528,7 +519,7 @@
             </div>
             <div class="comic-info">
                 <h3>Pavogato 2</h3>
-                <p>La propera aventura del superheroi Gatopavo</p>
+                <p>La propera aventura del superheroi Pavogato</p>
                 <span class="comic-genre">No disponible</span>
             </div>
         </a>
@@ -562,7 +553,7 @@
             <div class="about-text">
                 <h3>Hola, soc Mykhailo!</h3>
                 <p>
-                    Dibuixo c&#242;mics i invento hist&#242;ries. El meu primer c&#242;mic — Pavogato — &#233;s sobre el superheroi Gatpa&#243;, meitat gat, meitat pa&#243;.
+                    Dibuixo c&#242;mics i invento hist&#242;ries. El meu primer c&#242;mic — Pavogato — &#233;s sobre el superheroi Pavogato, meitat gat, meitat pa&#243;.
                 </p>
                 <p>
                     Tots els meus c&#242;mics estan dibuixats a m&#224; sobre paper!
