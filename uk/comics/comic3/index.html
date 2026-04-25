@@ -9,49 +9,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --red: #FF3333; --blue: #2B4C7E; --blue-dark: #1B2D4F;
-            --yellow: #FFDD00; --white: #ffffff; --black: #222222;
-        }
-        body { font-family: 'Open Sans', sans-serif; background: var(--blue-dark); color: var(--black); min-height: 100vh; }
-        body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 6px 6px; pointer-events: none; z-index: 0; }
-        header { background: var(--black); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 4px solid var(--yellow); }
-        .back-btn { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.8rem; color: var(--white); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s; }
-        .back-btn:hover { color: var(--yellow); }
-        .comic-header-title { font-family: 'Bangers', cursive; font-size: 1.5rem; color: var(--yellow); letter-spacing: 3px; text-shadow: 2px 2px 0 var(--red); }
-        .page-counter { font-family: 'Bangers', cursive; font-size: 1rem; color: var(--white); letter-spacing: 2px; }
-        .lang-switch { display: flex; gap: 3px; align-items: center; }
-        .lang-switch a { text-decoration: none; transition: transform 0.2s, opacity 0.3s; opacity: 0.5; line-height: 1; display: flex; align-items: center; }
-        .lang-switch a:hover { opacity: 1; transform: scale(1.15); }
-        .lang-switch a.active { opacity: 1; }
-        .lang-switch img { width: 18px; height: 14px; }
-        .reader { max-width: 800px; margin: 0 auto; padding: 30px 20px; position: relative; z-index: 1; }
-        .comic-details { background: var(--yellow); border-radius: 8px; padding: 25px 30px; margin-bottom: 25px; border: 3px solid var(--black); box-shadow: 5px 5px 0 var(--black); }
-        .comic-details h2 { font-family: 'Bangers', cursive; font-size: 2.2rem; margin-bottom: 8px; letter-spacing: 3px; }
-        .comic-details p { font-size: 1rem; line-height: 1.6; color: rgba(0,0,0,0.7); }
-        .comic-genre-tag { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--red); margin-top: 10px; display: inline-block; background: var(--white); padding: 3px 12px; border-radius: 4px; border: 2px solid var(--black); }
-        .series-tag { font-family: 'Bangers', cursive; font-size: 0.85rem; letter-spacing: 2px; color: var(--black); background: var(--red); color: var(--white); padding: 3px 12px; border-radius: 4px; border: 2px solid var(--black); margin-left: 8px; }
-        .page-wrapper { display: flex; align-items: center; gap: 10px; }
-        .side-arrow { flex-shrink: 0; width: 50px; height: 80px; background: var(--blue); border: 3px solid var(--black); border-radius: 6px; box-shadow: 3px 3px 0 var(--black); color: var(--white); font-family: 'Bangers', cursive; font-size: 1.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s; }
-        .side-arrow:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--black); }
-        .side-arrow:active { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--black); }
-        .side-arrow:disabled { opacity: 0.2; cursor: not-allowed; transform: none; box-shadow: 3px 3px 0 var(--black); }
-        .side-arrow.next-arrow { background: var(--red); }
-        .page-container { background: var(--black); border-radius: 8px; border: 3px solid var(--black); box-shadow: 6px 6px 0 var(--black); min-height: 400px; display: flex; align-items: center; justify-content: center; overflow: hidden; flex: 1; }
-        .page-container img { max-width: 100%; max-height: 90vh; display: block; user-select: none; -webkit-user-drag: none; }
-        .nav-buttons { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
-        .nav-btn { font-family: 'Bangers', cursive; font-size: 1.1rem; letter-spacing: 2px; padding: 12px 30px; border: 3px solid var(--black); border-radius: 6px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; color: var(--white); background: var(--blue); box-shadow: 3px 3px 0 var(--black); }
-        .nav-btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--black); }
-        .nav-btn:active { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--black); }
-        .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: 3px 3px 0 var(--black); }
-        .nav-btn.next { background: var(--red); }
-        .page-dots { display: flex; justify-content: center; gap: 6px; margin-bottom: 30px; flex-wrap: wrap; }
-        .dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.25); cursor: pointer; transition: transform 0.2s, background 0.2s; border: 2px solid rgba(255,255,255,0.4); }
-        .dot:hover { transform: scale(1.4); background: var(--white); }
-        .dot.active { background: var(--yellow); border-color: var(--yellow); transform: scale(1.2); }
-        @media (max-width: 700px) { .side-arrow { width: 36px; height: 60px; font-size: 1.3rem; } .page-wrapper { gap: 5px; } }
-        @media (max-width: 600px) { .comic-header-title { display: none; } .nav-btn { padding: 10px 20px; font-size: 0.95rem; } .comic-details h2 { font-size: 1.6rem; } }
-        @media (max-width: 480px) { .side-arrow { width: 28px; height: 50px; font-size: 1rem; border-width: 2px; } }
+        :root { --red:#FF3333; --blue:#2B4C7E; --blue-dark:#1B2D4F; --yellow:#FFDD00; --white:#ffffff; --black:#222222; }
+        body { font-family:'Open Sans',sans-serif; background:var(--blue-dark); color:var(--black); min-height:100vh; }
+        body::before { content:''; position:fixed; inset:0; background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px); background-size:6px 6px; pointer-events:none; z-index:0; }
+        header { background:var(--black); padding:12px 20px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; border-bottom:4px solid var(--yellow); }
+        .back-btn { font-family:'Montserrat',sans-serif; font-weight:900; font-size:.8rem; color:var(--white); text-decoration:none; text-transform:uppercase; letter-spacing:2px; transition:color .3s; }
+        .back-btn:hover { color:var(--yellow); }
+        .comic-header-title { font-family:'Bangers',cursive; font-size:1.5rem; color:var(--yellow); letter-spacing:3px; text-shadow:2px 2px 0 var(--red); }
+        .page-counter { font-family:'Bangers',cursive; font-size:1rem; color:var(--white); letter-spacing:2px; }
+        .lang-switch { display:flex; gap:3px; align-items:center; }
+        .lang-switch a { text-decoration:none; transition:transform .2s,opacity .3s; opacity:.5; line-height:1; display:flex; align-items:center; }
+        .lang-switch a:hover { opacity:1; transform:scale(1.15); }
+        .lang-switch a.active { opacity:1; }
+        .lang-switch img { width:18px; height:14px; }
+        .reader { max-width:800px; margin:0 auto; padding:30px 20px; position:relative; z-index:1; }
+        .comic-details { background:var(--yellow); border-radius:8px; padding:25px 30px; margin-bottom:25px; border:3px solid var(--black); box-shadow:5px 5px 0 var(--black); }
+        .comic-details h2 { font-family:'Bangers',cursive; font-size:2.2rem; margin-bottom:8px; letter-spacing:3px; }
+        .comic-details p { font-size:1rem; line-height:1.6; color:rgba(0,0,0,.7); }
+        .comic-genre-tag { font-family:'Montserrat',sans-serif; font-weight:900; font-size:.7rem; text-transform:uppercase; letter-spacing:2px; color:var(--red); margin-top:10px; display:inline-block; background:var(--white); padding:3px 12px; border-radius:4px; border:2px solid var(--black); }
+        .series-tag { font-family:'Bangers',cursive; font-size:.85rem; letter-spacing:2px; background:var(--red); color:var(--white); padding:3px 12px; border-radius:4px; border:2px solid var(--black); margin-left:8px; }
+        .page-wrapper { display:flex; align-items:center; gap:10px; }
+        .side-arrow { flex-shrink:0; width:50px; height:80px; background:var(--blue); border:3px solid var(--black); border-radius:6px; box-shadow:3px 3px 0 var(--black); color:var(--white); font-family:'Bangers',cursive; font-size:1.8rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:transform .2s,box-shadow .2s; }
+        .side-arrow:hover { transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--black); }
+        .side-arrow:active { transform:translate(1px,1px); box-shadow:2px 2px 0 var(--black); }
+        .side-arrow:disabled { opacity:.2; cursor:not-allowed; transform:none; }
+        .side-arrow.next-arrow { background:var(--red); }
+        .page-container { background:var(--black); border-radius:8px; border:3px solid var(--black); box-shadow:6px 6px 0 var(--black); min-height:400px; display:flex; align-items:center; justify-content:center; overflow:hidden; flex:1; }
+        .page-container img { max-width:100%; max-height:90vh; display:block; user-select:none; -webkit-user-drag:none; }
+        .nav-buttons { display:flex; justify-content:center; gap:15px; margin:25px 0; }
+        .nav-btn { font-family:'Bangers',cursive; font-size:1.1rem; letter-spacing:2px; padding:12px 30px; border:3px solid var(--black); border-radius:6px; cursor:pointer; transition:transform .2s,box-shadow .2s; color:var(--white); background:var(--blue); box-shadow:3px 3px 0 var(--black); }
+        .nav-btn:hover { transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--black); }
+        .nav-btn:disabled { opacity:.3; cursor:not-allowed; transform:none; }
+        .nav-btn.next { background:var(--red); }
+        .page-dots { display:flex; justify-content:center; gap:6px; margin-bottom:30px; flex-wrap:wrap; }
+        .dot { width:12px; height:12px; border-radius:50%; background:rgba(255,255,255,.25); cursor:pointer; transition:transform .2s,background .2s; border:2px solid rgba(255,255,255,.4); }
+        .dot:hover { transform:scale(1.4); background:var(--white); }
+        .dot.active { background:var(--yellow); border-color:var(--yellow); transform:scale(1.2); }
+        @media(max-width:700px){ .side-arrow{width:36px;height:60px;font-size:1.3rem;} .page-wrapper{gap:5px;} }
+        @media(max-width:600px){ .comic-header-title{display:none;} .nav-btn{padding:10px 20px;font-size:.95rem;} }
+        @media(max-width:480px){ .side-arrow{width:28px;height:50px;font-size:1rem;border-width:2px;} }
     </style>
 </head>
 <body>
@@ -69,28 +65,23 @@
         <a href="../../../hu/comics/comic3/index.html" title="Magyar"><img src="https://flagcdn.com/16x12/hu.png" alt="HU" style="vertical-align:middle"></a>
     </div>
 </header>
-
 <div class="reader">
     <div class="comic-details">
         <h2>PAVOGATO <span class="series-tag">SERIE 3</span></h2>
-        <p>Pavogato повертається! Серія 3 — нові пригоди, нові вороги і ще більше пір'я.</p>
+        <p>Серія 3 Pavogato вже тут!</p>
         <span class="comic-genre-tag">Супергерої</span>
     </div>
-
     <div class="page-wrapper">
         <button class="side-arrow prev-arrow" id="prevArrow" onclick="prevPage()">&#9664;</button>
         <div class="page-container" id="pageContainer"></div>
         <button class="side-arrow next-arrow" id="nextArrow" onclick="nextPage()">&#9654;</button>
     </div>
-
     <div class="nav-buttons">
         <button class="nav-btn prev" id="prevBtn" onclick="prevPage()">&larr; BACK</button>
         <button class="nav-btn next" id="nextBtn" onclick="nextPage()">NEXT &rarr;</button>
     </div>
-
     <div class="page-dots" id="pageDots"></div>
 </div>
-
 <script>
     const PAGES = [
         { src: "../../../comics/pavogato/pages/mcomics_pavogato_3_1.jpg", alt: "Обкладинка" },
@@ -106,60 +97,44 @@
         { src: "../../../comics/pavogato/pages/mcomics_pavogato_3_11.jpg", alt: "Сторінка 10" },
         { src: "../../../comics/pavogato/pages/mcomics_pavogato_3_12.jpg", alt: "Сторінка 11" },
     ];
-
-    let currentPage = 0;
+    let cur = 0;
     const container = document.getElementById('pageContainer');
-    const counter = document.getElementById('pageCounter');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+    const counter   = document.getElementById('pageCounter');
+    const prevBtn   = document.getElementById('prevBtn');
+    const nextBtn   = document.getElementById('nextBtn');
     const prevArrow = document.getElementById('prevArrow');
     const nextArrow = document.getElementById('nextArrow');
-    const dotsContainer = document.getElementById('pageDots');
+    const dots      = document.getElementById('pageDots');
 
     function renderDots() {
-        dotsContainer.innerHTML = '';
-        PAGES.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.className = 'dot' + (i === currentPage ? ' active' : '');
-            dot.onclick = () => goToPage(i);
-            dotsContainer.appendChild(dot);
+        dots.innerHTML = '';
+        PAGES.forEach((_,i) => {
+            const d = document.createElement('div');
+            d.className = 'dot' + (i===cur?' active':'');
+            d.onclick = () => showPage(i);
+            dots.appendChild(d);
         });
     }
-
-    function showPage(index) {
-        currentPage = index;
-        const page = PAGES[index];
-        container.innerHTML = '<img src="' + page.src + '" alt="' + page.alt + '">';
-        counter.textContent = (index + 1) + ' / ' + PAGES.length;
-        prevBtn.disabled = index === 0;
-        nextBtn.disabled = index === PAGES.length - 1;
-        prevArrow.disabled = index === 0;
-        nextArrow.disabled = index === PAGES.length - 1;
+    function showPage(i) {
+        cur = i;
+        container.innerHTML = '<img src="'+PAGES[i].src+'" alt="'+PAGES[i].alt+'">';
+        counter.textContent = (i+1)+' / '+PAGES.length;
+        prevBtn.disabled = prevArrow.disabled = i===0;
+        nextBtn.disabled = nextArrow.disabled = i===PAGES.length-1;
         renderDots();
     }
-
-    function nextPage() { if (currentPage < PAGES.length - 1) showPage(currentPage + 1); }
-    function prevPage() { if (currentPage > 0) showPage(currentPage - 1); }
-    function goToPage(index) { showPage(index); }
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextPage(); }
-        if (e.key === 'ArrowLeft') { e.preventDefault(); prevPage(); }
+    function nextPage() { if(cur<PAGES.length-1) showPage(cur+1); }
+    function prevPage() { if(cur>0) showPage(cur-1); }
+    document.addEventListener('keydown', e => {
+        if(e.key==='ArrowRight'||e.key===' '){ e.preventDefault(); nextPage(); }
+        if(e.key==='ArrowLeft'){ e.preventDefault(); prevPage(); }
     });
-
-    let touchStartX = 0, touchStartY = 0;
-    container.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        touchStartY = e.changedTouches[0].screenY;
-    }, { passive: true });
-    container.addEventListener('touchend', (e) => {
-        const diffX = touchStartX - e.changedTouches[0].screenX;
-        const diffY = Math.abs(touchStartY - e.changedTouches[0].screenY);
-        if (Math.abs(diffX) > 50 && Math.abs(diffX) > diffY) {
-            if (diffX > 0) nextPage(); else prevPage();
-        }
-    }, { passive: true });
-
+    let tx=0,ty=0;
+    container.addEventListener('touchstart', e=>{ tx=e.changedTouches[0].screenX; ty=e.changedTouches[0].screenY; }, {passive:true});
+    container.addEventListener('touchend', e=>{
+        const dx=tx-e.changedTouches[0].screenX, dy=Math.abs(ty-e.changedTouches[0].screenY);
+        if(Math.abs(dx)>50&&Math.abs(dx)>dy){ if(dx>0)nextPage();else prevPage(); }
+    }, {passive:true});
     showPage(0);
 </script>
 </body>
